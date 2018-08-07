@@ -31,8 +31,22 @@ public class MyDemoLoggingAspect {
 		// Print out the results of the method call
 		System.out.println("\n=======>>> Result is: " + result);
 		
+		// Let's post-process the data ... let's modify it
+		
+		// Convert the account names to uppercase
+		convertAccountNamesToUpperCase(result);
+		
+		System.out.println("\n=======>>> Result is: " + result);
+		
 	}
 	
+	private void convertAccountNamesToUpperCase(List<Account> result) {
+		
+		result.forEach(tempAccount -> 
+			tempAccount.setName(tempAccount.getName().toUpperCase()));
+		
+	}
+
 	@Before("com.corey.aopdemo.aspect.AopDeclarations.forDaoPackageNoGetterSetter()")
 	public void beforeAddAccountAdvice(JoinPoint theJoinPoint) {
 		
