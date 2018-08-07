@@ -22,11 +22,11 @@ public class MainDemoApp {
 		
 		// Call the business methods
 		Account myAccount = new Account();
+		myAccount.setName("Corey");
+		myAccount.setLevel("Platinum");
+		
 		theAccountDAO.addAccount(myAccount, true);
 		theAccountDAO.doWork();
-		
-		theAccountDAO.setName("Corey");
-		theAccountDAO.setServiceCode("Silver");
 		
 		theAccountDAO.getName();
 		theAccountDAO.getServiceCode();
