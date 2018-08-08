@@ -16,7 +16,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.corey.aopdemo.Account;
-import com.corey.aopdemo.AroundWithLoggerDemoApp;
 
 @Aspect
 @Component
@@ -37,7 +36,18 @@ public class MyDemoLoggingAspect {
 		long begin = System.currentTimeMillis();
 		
 		// Execute the method
-		Object result = theProceedingJoinPoint.proceed();
+		Object result = null;
+		
+		try {
+			result = theProceedingJoinPoint.proceed();
+		} catch (Exception e) {
+			// Log the exception
+			myLogger.warning(e.getMessage());
+			
+			// Give user a custom message
+			result = "Major accident! But no worries, "
+					+ "your private AOP helicopter is on the way";
+		}
 		
 		// Get end timestamp
 		long end = System.currentTimeMillis();
